@@ -38,7 +38,7 @@ let rec fib = function
   __LOC__, (fun _ -> Eq(hash_variant2 "xxyyzxzzyy", -449896130) );
 
   "int_literal_flow", (fun _ -> Eq(-1, 0xffffffff) );
-  "int_literal_flow2", (fun _ -> Eq(-1l, Int32.of_int 0xffffffff) );
-  "int_literal_flow3", (fun _ -> Eq(-1l, Int32.of_int 0xfffffffff));
+  "int_literal_flow2", (fun _ -> Eq(-1l, Int32.of_int 0xffff_ffff) );
+  "int_literal_flow3", (fun _ -> Eq(-1l, Int32.of_int 0xf_ffff_ffff));
   (* "int32_mul", (fun _ -> Eq(-33554431l, Int32.mul 0xffffffl 0xffffffl )) *)
 ]

@@ -154,7 +154,7 @@ let get32 l =
   Char.code (Bytes.get obuf (l+3)) * 0x1000000
 
 let rec patch rel loc n =
-  assert (n < 0x100000000);
+  assert (n < 0x1000000);
   if loc <> 0 then begin
     let i = !opos in
     let loc' = get32 loc in
@@ -612,7 +612,7 @@ let elfgen outf =
   let main = addsym "main" in
   let gmain = globs.(main) in
   out 0x488b3c24;               (* mov (%rsp), %rdi     *)
-  out 0x488d742408;             (* lea 8(%rsp), %rsi    *)
+  out 0x488d7424;             (* lea 8(%rsp), %rsi    *)
   out 0x48b8;
   le 64 gmain.loc;              (* mov main, %rax       *)
   globs.(main) <- { gmain with loc = !opos-8 };

@@ -605,6 +605,10 @@ let rec unsafe_mapper : Ast_mapper.mapper =
               Ast_mapper.default_mapper.expr  mapper e
             end
           end
+        | Pexp_constant (Const_int i ) 
+          when Int64.of_int i > 0xFFFF_FFFFL -> 
+          raise (Lexer.Error(Literal_overflow "int", e.pexp_loc))
+
         | _ ->  Ast_mapper.default_mapper.expr  mapper e
       );
     typ = (fun self typ -> handle_typ Ast_mapper.default_mapper self typ);
