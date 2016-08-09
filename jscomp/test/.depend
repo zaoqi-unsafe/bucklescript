@@ -64,6 +64,8 @@ array_test.cmj : ../stdlib/pervasives.cmi mt.cmi ../stdlib/list.cmi \
     ../stdlib/array.cmi array_test.cmi
 array_test.cmx : ../stdlib/pervasives.cmx mt.cmx ../stdlib/list.cmx \
     ../stdlib/array.cmx array_test.cmi
+attr_syntax.cmj :
+attr_syntax.cmx :
 attr_test.cmj :
 attr_test.cmx :
 b.cmj :
@@ -814,6 +816,8 @@ array_test.cmo : ../stdlib/pervasives.cmi mt.cmi ../stdlib/list.cmi \
     ../stdlib/array.cmi array_test.cmi
 array_test.cmj : ../stdlib/pervasives.cmj mt.cmj ../stdlib/list.cmj \
     ../stdlib/array.cmj array_test.cmi
+attr_syntax.cmo :
+attr_syntax.cmj :
 attr_test.cmo :
 attr_test.cmj :
 b.cmo :
