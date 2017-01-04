@@ -111,3 +111,6 @@ val replace_backward_slash : string -> string
 
 (** if no conversion happens, reference equality holds *)
 val replace_slash_backward : string -> string 
+
+(** Under Unix, it is an nop, under Windows/Cygwin it convert backslash to forward slash *)
+val simple_convert_node_path_to_os_path : string -> string 

@@ -100,3 +100,5 @@ val rindex_opt : string -> char -> int option
 val is_valid_source_name : string -> bool
 
 val no_char : string -> char -> int -> int -> bool 
+
+val empty : string 

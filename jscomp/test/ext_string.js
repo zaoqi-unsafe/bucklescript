@@ -589,6 +589,8 @@ var check_suffix_case = ends_with;
 
 var check_suffix_case_then_chop = ends_with_then_chop;
 
+var empty = "";
+
 exports.split_by                        = split_by;
 exports.trim                            = trim;
 exports.split                           = split;
@@ -624,4 +626,5 @@ exports.is_valid_module_file            = is_valid_module_file;
 exports.is_valid_source_name            = is_valid_source_name;
 exports.unsafe_no_char                  = unsafe_no_char;
 exports.no_char                         = no_char;
+exports.empty                           = empty;
 /* No side effect */

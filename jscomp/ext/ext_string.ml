@@ -337,3 +337,5 @@ let no_char x ch i len =
   let str_len = String.length x in 
   if i < 0 || i >= str_len || len >= str_len then invalid_arg "Ext_string.no_char"   
   else unsafe_no_char x ch i len 
+
+let empty = ""
