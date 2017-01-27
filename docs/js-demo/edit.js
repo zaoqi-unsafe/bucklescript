@@ -45,6 +45,9 @@ var log_output = PROMPT;
 var ERR_OUTPUT = "Warnings: "
 var err_output = ERR_OUTPUT;
 
+if(window.Worker){
+  var compile_worker = new Worker('./worker.js')
+}  
 function reset_log_output (){ log_output  = PROMPT;}
 function reset_error_output(){ err_output = ERR_OUTPUT;}
 function get_log_output(){
@@ -174,7 +177,9 @@ function onEditChanges(cm, change) {
     compile_code = ocaml.compile;
   }
   console.error = redirect_err;
-  var raw = compile_code(myCode1Mirror.getValue());
+  var current_code = myCode1Mirror.getValue()
+  compile_worker.postMessage([current_code])
+  var raw = compile_code(current_code);
   errorMirror.setValue(get_error_output());
   console.error = original_err;
   console.log(raw);
