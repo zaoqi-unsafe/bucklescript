@@ -1,12 +1,14 @@
 'use strict';
 
-var Mt              = require("./mt.js");
-var Block           = require("../../lib/js/block.js");
-var Curry           = require("../../lib/js/curry.js");
-var Format          = require("../../lib/js/format.js");
-var Printexc        = require("../../lib/js/printexc.js");
-var Exception_def   = require("./exception_def.js");
-var Caml_exceptions = require("../../lib/js/caml_exceptions.js");
+var Mt                      = require("./mt.js");
+var Obj                     = require("../../lib/js/obj.js");
+var Block                   = require("../../lib/js/block.js");
+var Curry                   = require("../../lib/js/curry.js");
+var Format                  = require("../../lib/js/format.js");
+var Printexc                = require("../../lib/js/printexc.js");
+var Exception_def           = require("./exception_def.js");
+var Caml_exceptions         = require("../../lib/js/caml_exceptions.js");
+var Caml_builtin_exceptions = require("../../lib/js/caml_builtin_exceptions.js");
 
 var suites = [/* [] */0];
 
@@ -72,6 +74,10 @@ eq("File \"exception_repr_test.ml\", line 27, characters 7-14", "A", Printexc.to
           Exception_def.A,
           3
         ]));
+
+eq("File \"exception_repr_test.ml\", line 28, characters 7-14", "Not_found", Obj.extension_name(Caml_builtin_exceptions.not_found));
+
+eq("File \"exception_repr_test.ml\", line 29, characters 7-14", Obj.extension_id(Caml_builtin_exceptions.not_found), Printexc.exn_slot_id(Caml_builtin_exceptions.not_found));
 
 Mt.from_pair_suites("exception_repr_test.ml", suites[0]);
 

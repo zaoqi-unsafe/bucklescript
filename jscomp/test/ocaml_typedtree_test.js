@@ -12520,7 +12520,7 @@ function add_signature(_sg, _env) {
 function open_signature(slot, root, sg, env0) {
   var match = prefix_idents_and_subst$1(root, identity, sg);
   var sg$1 = match[2];
-  var tag = sg$1.tag | 0;
+  var tag = Caml_obj.caml_obj_tag(sg$1);
   var sg$2 = tag === 250 ? sg$1[0] : (
       tag === 246 ? CamlinternalLazy.force_lazy_block(sg$1) : sg$1
     );
@@ -14655,9 +14655,9 @@ var yyact = /* array */[
       }
       var bindings$1 = List.map(function (lb) {
             var lzarg = lb[/* lb_docs */3];
-            var tag = lzarg.tag | 0;
+            var tag = Caml_obj.caml_obj_tag(lzarg);
             var lzarg$1 = lb[/* lb_text */4];
-            var tag$1 = lzarg$1.tag | 0;
+            var tag$1 = Caml_obj.caml_obj_tag(lzarg$1);
             return mk$17(/* Some */[lb[/* lb_loc */5]], /* Some */[lb[/* lb_attributes */2]], /* Some */[tag === 250 ? lzarg[0] : (
                             tag === 246 ? CamlinternalLazy.force_lazy_block(lzarg) : lzarg
                           )], /* Some */[tag$1 === 250 ? lzarg$1[0] : (
@@ -26435,7 +26435,7 @@ function instance_poly($staropt$star, fixed, univars, sch) {
   delayed_copy[0] = /* [] */0;
   var ty = copy_sep(fixed, compute_univars(sch), /* [] */0, pairs, sch);
   List.iter(function (prim) {
-        var tag = prim.tag | 0;
+        var tag = Caml_obj.caml_obj_tag(prim);
         if (tag === 250) {
           return prim[0];
         } else if (tag === 246) {
@@ -70369,7 +70369,7 @@ function class_type$3(env, scty) {
   delayed_meth_specs[0] = /* [] */0;
   var cty = class_type$2(env, scty);
   List.iter(function (prim) {
-        var tag = prim.tag | 0;
+        var tag = Caml_obj.caml_obj_tag(prim);
         if (tag === 250) {
           return prim[0];
         } else if (tag === 246) {
@@ -71089,7 +71089,7 @@ function class_structure(cl_num, $$final, val_env, met_env, loc, param) {
         }, methods);
   }
   var fields = List.map(function (prim) {
-        var tag = prim.tag | 0;
+        var tag = Caml_obj.caml_obj_tag(prim);
         if (tag === 250) {
           return prim[0];
         } else if (tag === 246) {

@@ -24,7 +24,9 @@ let () =
     eq __LOC__ "hey" (Printexc.to_string Hi);
     eq __LOC__ "A(1)" (Printexc.to_string (A 1));
     eq __LOC__ "Exception_repr_test.Hello" (Printexc.to_string Hello);
-    eq __LOC__ "A" (Printexc.to_string @@ AAA 3)
+    eq __LOC__ "A" (Printexc.to_string @@ AAA 3);
+    eq __LOC__ "Not_found" (Obj.extension_name Not_found);
+    eq __LOC__ (Obj.extension_id Not_found) (Printexc.exn_slot_id Not_found)
 
 ;; Mt.from_pair_suites __FILE__ !suites
 

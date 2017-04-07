@@ -282,3 +282,8 @@ let caml_greaterthan a b = caml_compare a b > 0
 let caml_lessequal a b = caml_compare a b <= 0
 
 let caml_lessthan a b = caml_compare a b < 0
+
+let caml_obj_tag a = 
+  if Js.typeof a = "string" then 252 
+  else if Js.typeof a = "number" then 1000
+  else Bs_obj.tag a 

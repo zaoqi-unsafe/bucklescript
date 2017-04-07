@@ -4,6 +4,7 @@ var Mt                      = require("./mt.js");
 var Lazy                    = require("../../lib/js/lazy.js");
 var Block                   = require("../../lib/js/block.js");
 var Js_exn                  = require("../../lib/js/js_exn.js");
+var Caml_obj                = require("../../lib/js/caml_obj.js");
 var CamlinternalLazy        = require("../../lib/js/camlinternalLazy.js");
 var Caml_builtin_exceptions = require("../../lib/js/caml_builtin_exceptions.js");
 
@@ -16,7 +17,7 @@ var v = Block.__(246, [function () {
 
 function lazy_test() {
   var h = u[0];
-  var tag = v.tag | 0;
+  var tag = Caml_obj.caml_obj_tag(v);
   if (tag !== 250) {
     if (tag === 246) {
       CamlinternalLazy.force_lazy_block(v);
@@ -32,7 +33,7 @@ function lazy_test() {
 
 function f(param) {
   var match = param[0];
-  var tag = match.tag | 0;
+  var tag = Caml_obj.caml_obj_tag(match);
   if (tag !== 250) {
     if (tag === 246) {
       CamlinternalLazy.force_lazy_block(match);
@@ -42,7 +43,7 @@ function f(param) {
   var match$1 = param[2][/* contents */0];
   if (match$1) {
     var match$2 = param[1];
-    var tag$1 = match$2.tag | 0;
+    var tag$1 = Caml_obj.caml_obj_tag(match$2);
     if (tag$1 !== 250) {
       if (tag$1 === 246) {
         CamlinternalLazy.force_lazy_block(match$2);
@@ -104,7 +105,7 @@ var u$1 = Block.__(246, [function () {
       return /* () */0;
     }]);
 
-var tag = u$1.tag | 0;
+var tag = Caml_obj.caml_obj_tag(u$1);
 
 if (tag !== 250) {
   if (tag === 246) {
@@ -114,7 +115,7 @@ if (tag !== 250) {
 }
 
 function exotic(param) {
-  var tag = param.tag | 0;
+  var tag = Caml_obj.caml_obj_tag(param);
   if (tag === 250) {
     return param[0];
   } else if (tag === 246) {
@@ -171,7 +172,7 @@ Mt.from_pair_suites("lazy_test.ml", /* :: */[
             /* tuple */[
               "lazy_from_fun",
               function () {
-                var tag = l_from_fun.tag | 0;
+                var tag = Caml_obj.caml_obj_tag(l_from_fun);
                 return /* Eq */Block.__(0, [
                           tag === 250 ? l_from_fun[0] : (
                               tag === 246 ? CamlinternalLazy.force_lazy_block(l_from_fun) : l_from_fun
@@ -185,7 +186,7 @@ Mt.from_pair_suites("lazy_test.ml", /* :: */[
                 "lazy_from_val",
                 function () {
                   var lzarg = Lazy.from_val(3);
-                  var tag = lzarg.tag | 0;
+                  var tag = Caml_obj.caml_obj_tag(lzarg);
                   return /* Eq */Block.__(0, [
                             tag === 250 ? lzarg[0] : (
                                 tag === 246 ? CamlinternalLazy.force_lazy_block(lzarg) : lzarg
@@ -199,11 +200,11 @@ Mt.from_pair_suites("lazy_test.ml", /* :: */[
                   "lazy_from_val2",
                   function () {
                     var lzarg = Lazy.from_val(3);
-                    var tag = lzarg.tag | 0;
+                    var tag = Caml_obj.caml_obj_tag(lzarg);
                     var prim = tag === 250 ? lzarg[0] : (
                         tag === 246 ? CamlinternalLazy.force_lazy_block(lzarg) : lzarg
                       );
-                    var tag$1 = prim.tag | 0;
+                    var tag$1 = Caml_obj.caml_obj_tag(prim);
                     return /* Eq */Block.__(0, [
                               tag$1 === 250 ? prim[0] : (
                                   tag$1 === 246 ? CamlinternalLazy.force_lazy_block(prim) : prim
@@ -218,11 +219,11 @@ Mt.from_pair_suites("lazy_test.ml", /* :: */[
                     function () {
                       debugger;
                       var lzarg = Lazy.from_val(forward_test);
-                      var tag = lzarg.tag | 0;
+                      var tag = Caml_obj.caml_obj_tag(lzarg);
                       var prim = tag === 250 ? lzarg[0] : (
                           tag === 246 ? CamlinternalLazy.force_lazy_block(lzarg) : lzarg
                         );
-                      var tag$1 = prim.tag | 0;
+                      var tag$1 = Caml_obj.caml_obj_tag(prim);
                       return /* Eq */Block.__(0, [
                                 tag$1 === 250 ? prim[0] : (
                                     tag$1 === 246 ? CamlinternalLazy.force_lazy_block(prim) : prim

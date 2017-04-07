@@ -80,7 +80,7 @@ function fib(n) {
       case 2 : 
           return three[0];
       case 3 : 
-          var tag = h.tag | 0;
+          var tag = Caml_obj.caml_obj_tag(h);
           v[0] = tag === 250 ? fib : (
               tag === 246 ? CamlinternalLazy.force_lazy_block(h) : h
             );
@@ -164,7 +164,7 @@ function even2(_n) {
 }
 
 function lazy_v() {
-  var tag = lazy_v.tag | 0;
+  var tag = Caml_obj.caml_obj_tag(lazy_v);
   if (tag !== 250) {
     if (tag === 246) {
       CamlinternalLazy.force_lazy_block(lazy_v);

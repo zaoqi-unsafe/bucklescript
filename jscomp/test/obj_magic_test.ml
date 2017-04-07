@@ -9,7 +9,8 @@ let suites = Mt.[
 "is_block_test1", (fun _ -> Eq (false, is_block 3));
 "is_block_test2", (fun _ -> Eq (true, is_block [3]));
 "is_block_test3", (fun _ -> Eq(true, is_block "x"));
-"is_block_test4", (fun _ -> Eq (false, is_block 3.0))
+"is_block_test4", (fun _ -> Eq (false, is_block 3.0));
+
 ]
 (** 
 

@@ -51,4 +51,4 @@ val caml_greaterequal : eq
 val caml_greaterthan : eq
 val caml_lessthan : eq
 val caml_lessequal : eq
-
+val caml_obj_tag : Obj.t -> int 

@@ -130,7 +130,7 @@ function dump(r) {
           return Caml_obj.caml_equal(r, 0);
         } else {
           var s = r.length;
-          var t = r.tag | 0;
+          var t = Caml_obj.caml_obj_tag(r);
           if (t) {
             return /* false */0;
           } else if (s === 2) {
@@ -156,7 +156,7 @@ function dump(r) {
       }
     };
     var s = r.length;
-    var t = r.tag | 0;
+    var t = Caml_obj.caml_obj_tag(r);
     if (is_list(r)) {
       var fields = get_list(r);
       return "[" + ($$String.concat("; ", List.map(dump, fields)) + "]");

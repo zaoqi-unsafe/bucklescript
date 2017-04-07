@@ -4500,9 +4500,9 @@ var yyact = /* array */[
       }
       var bindings$1 = List.map(function (lb) {
             var lzarg = lb[/* lb_docs */3];
-            var tag = lzarg.tag | 0;
+            var tag = Caml_obj.caml_obj_tag(lzarg);
             var lzarg$1 = lb[/* lb_text */4];
-            var tag$1 = lzarg$1.tag | 0;
+            var tag$1 = Caml_obj.caml_obj_tag(lzarg$1);
             return mk$17(/* Some */[lb[/* lb_loc */5]], /* Some */[lb[/* lb_attributes */2]], /* Some */[tag === 250 ? lzarg[0] : (
                             tag === 246 ? CamlinternalLazy.force_lazy_block(lzarg) : lzarg
                           )], /* Some */[tag$1 === 250 ? lzarg$1[0] : (

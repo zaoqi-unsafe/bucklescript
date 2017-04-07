@@ -8,6 +8,7 @@ var Curry                   = require("../../lib/js/curry.js");
 var Format                  = require("../../lib/js/format.js");
 var Js_exn                  = require("../../lib/js/js_exn.js");
 var $$String                = require("../../lib/js/string.js");
+var Caml_obj                = require("../../lib/js/caml_obj.js");
 var Caml_sys                = require("../../lib/js/caml_sys.js");
 var Filename                = require("../../lib/js/filename.js");
 var Literals                = require("./literals.js");
@@ -41,7 +42,7 @@ function absolute_path(s) {
   var s$1 = s;
   var s$2;
   if (Curry._1(Filename.is_relative, s$1)) {
-    var tag = cwd.tag | 0;
+    var tag = Caml_obj.caml_obj_tag(cwd);
     s$2 = Filename.concat(tag === 250 ? cwd[0] : (
             tag === 246 ? CamlinternalLazy.force_lazy_block(cwd) : cwd
           ), s$1);
@@ -258,7 +259,7 @@ function find_package_json_dir(cwd) {
 }
 
 var package_dir = Block.__(246, [function () {
-      var tag = cwd.tag | 0;
+      var tag = Caml_obj.caml_obj_tag(cwd);
       var cwd$1 = tag === 250 ? cwd[0] : (
           tag === 246 ? CamlinternalLazy.force_lazy_block(cwd) : cwd
         );

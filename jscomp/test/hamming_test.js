@@ -134,7 +134,7 @@ function pr(param) {
 
 function map(f, l) {
   return Block.__(246, [function () {
-              var tag = l.tag | 0;
+              var tag = Caml_obj.caml_obj_tag(l);
               var match = tag === 250 ? l[0] : (
                   tag === 246 ? CamlinternalLazy.force_lazy_block(l) : l
                 );
@@ -147,11 +147,11 @@ function map(f, l) {
 
 function merge(cmp, l1, l2) {
   return Block.__(246, [function () {
-              var tag = l1.tag | 0;
+              var tag = Caml_obj.caml_obj_tag(l1);
               var match = tag === 250 ? l1[0] : (
                   tag === 246 ? CamlinternalLazy.force_lazy_block(l1) : l1
                 );
-              var tag$1 = l2.tag | 0;
+              var tag$1 = Caml_obj.caml_obj_tag(l2);
               var match$1 = tag$1 === 250 ? l2[0] : (
                   tag$1 === 246 ? CamlinternalLazy.force_lazy_block(l2) : l2
                 );
@@ -188,7 +188,7 @@ function iter_interval(f, _l, _param) {
     var stop = param[1];
     if (stop) {
       var start = param[0];
-      var tag = l.tag | 0;
+      var tag = Caml_obj.caml_obj_tag(l);
       var match = tag === 250 ? l[0] : (
           tag === 246 ? CamlinternalLazy.force_lazy_block(l) : l
         );
@@ -225,7 +225,7 @@ Caml_obj.caml_update_dummy(hamming, Block.__(246, [function () {
 
 Caml_obj.caml_update_dummy(ham2, Block.__(246, [function () {
           var lzarg = map(x2, hamming);
-          var tag = lzarg.tag | 0;
+          var tag = Caml_obj.caml_obj_tag(lzarg);
           if (tag === 250) {
             return lzarg[0];
           } else if (tag === 246) {
@@ -237,7 +237,7 @@ Caml_obj.caml_update_dummy(ham2, Block.__(246, [function () {
 
 Caml_obj.caml_update_dummy(ham3, Block.__(246, [function () {
           var lzarg = map(x3, hamming);
-          var tag = lzarg.tag | 0;
+          var tag = Caml_obj.caml_obj_tag(lzarg);
           if (tag === 250) {
             return lzarg[0];
           } else if (tag === 246) {
@@ -249,7 +249,7 @@ Caml_obj.caml_update_dummy(ham3, Block.__(246, [function () {
 
 Caml_obj.caml_update_dummy(ham5, Block.__(246, [function () {
           var lzarg = map(x5, hamming);
-          var tag = lzarg.tag | 0;
+          var tag = Caml_obj.caml_obj_tag(lzarg);
           if (tag === 250) {
             return lzarg[0];
           } else if (tag === 246) {

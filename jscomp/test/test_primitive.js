@@ -1,6 +1,7 @@
 'use strict';
 
 var Curry            = require("../../lib/js/curry.js");
+var Caml_obj         = require("../../lib/js/caml_obj.js");
 var Caml_array       = require("../../lib/js/caml_array.js");
 var Pervasives       = require("../../lib/js/pervasives.js");
 var CamlinternalLazy = require("../../lib/js/camlinternalLazy.js");
@@ -74,7 +75,7 @@ function f(x) {
 }
 
 function is_lazy_force(x) {
-  var tag = x.tag | 0;
+  var tag = Caml_obj.caml_obj_tag(x);
   if (tag === 250) {
     return x[0];
   } else if (tag === 246) {

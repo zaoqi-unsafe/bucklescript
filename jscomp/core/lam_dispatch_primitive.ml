@@ -592,9 +592,10 @@ let translate (prim_name : string)
     (* Note that in ocaml, [int] has tag [1000] and [string] has tag [252]
        also now we need do nullary check 
     *)      
-    begin match args with 
-    | [e] -> E.tag e 
-    | _ -> assert false end
+    call Js_config.obj_runtime
+    (* begin match args with  *)
+    (* | [e] -> E.tag e  *)
+    (* | _ -> assert false end *)
 
   (* Unix support *)
   | "unix_tcdrain"
