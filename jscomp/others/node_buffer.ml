@@ -26,8 +26,8 @@
 
 type t = Node.buffer 
 
-external isBuffer : 'a -> bool = "Buffer.isBuffer" 
-[@@bs.val]
+external isBuffer : 'a -> bool = "isBuffer" 
+[@@bs.val] [@@bs.scope "Buffer"]
 
-external fromString : string -> t = "Buffer.from"
-[@@bs.val]
+external fromString : string -> t = "from"
+[@@bs.val] [@@bs.scope "Buffer"]
