@@ -4,6 +4,10 @@ COMPILER=../bin/bsc.exe
 
 MAP_FILES= node bs
 
+
+node_buffer.ml:node_buffer.ml.cppo
+	cppo $^ -o $@
+
 SOURCE_LIST= node_path node_fs node_process dict node_module js_array js_string \
 	js_re js_null_undefined node_buffer js_types js_json js_obj bs_dyn bs_dyn_lib \
 	node_child_process js_boolean js_math js_dict js_date js_global js_cast js_promise dom
