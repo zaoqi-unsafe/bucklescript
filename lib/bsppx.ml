@@ -18797,8 +18797,52 @@ let reset () =
   record_as_js_object := false ;
   no_export  :=  false
 
+let rec is_simple_pattern (p : Parsetree.pattern) =   
+  match p.ppat_desc with 
+  | Ppat_any -> true 
+  | Ppat_var _ -> true 
+  | Ppat_constraint(p,_) -> is_simple_pattern p  
+  | _ -> false
 
+let rec destruct 
+    acc (e : Parsetree.expression) = 
+  match e.pexp_desc with 
+  | Pexp_open (flag, lid, cont)
+    -> 
+    destruct 
+      ((flag, lid, e.pexp_loc, e.pexp_attributes) :: acc)
+      cont 
+  | Pexp_tuple es -> Some (acc, es)
+  | v -> None
 
+let simple_tuple_pattern 
+    (x : Parsetree.pattern) 
+    (e : Parsetree.expression) attrs pvb_loc =
+  match destruct [] e with 
+  | None -> None 
+  | Some (acc, es) ->      
+    match x.ppat_desc , es with 
+    | Ppat_tuple xs, _ :: _
+      -> 
+      if List.for_all is_simple_pattern xs then 
+        Some (Ext_list.map2 (fun x y ->
+            {Parsetree.
+              pvb_pat = 
+                x;
+              pvb_expr =  List.fold_left (fun x (flag,lid,loc,attrs)  ->
+                  {Parsetree.
+                    pexp_desc = Pexp_open(flag,lid,x); 
+                    pexp_attributes = attrs;
+                    pexp_loc = loc
+                  }
+                ) y acc ;
+              pvb_attributes = attrs ; 
+              pvb_loc 
+            }
+          ) xs es)
+      else 
+        None
+    | _ -> None
 let process_getter_setter ~no ~get ~set
     loc name
     (attrs : Ast_attributes.t)
@@ -19481,7 +19525,36 @@ let rec unsafe_mapper : Ast_mapper.mapper =
                 pval_prim;
                 pval_attributes 
                }}
+        | Pstr_value (Nonrecursive, 
+                      [{pvb_pat; pvb_expr; pvb_attributes ; pvb_loc}])
+          -> 
+          (*
+            let (a,b) = M.N.(c,d) 
+            => 
+            let a = M.N.c 
+            and b = M.N.d in 
+          *)
+          let pat = self.pat self pvb_pat in 
+          let expr = self.expr self pvb_expr in  
+          let attrs = self.attributes self pvb_attributes in 
+          begin match simple_tuple_pattern pat expr attrs pvb_loc with  
+            | None ->
+              { str with pstr_desc = 
+                           Pstr_value 
+                             (Nonrecursive, 
+                              [{pvb_pat = pat; 
+                                pvb_expr = expr; 
+                                pvb_attributes = attrs;
+                                pvb_loc}]
+                             ) }
+            | Some xs -> 
+              { str with pstr_desc = 
+                           Pstr_value 
+                             (Nonrecursive, 
+                              xs 
 
+                             ) }
+          end 
         | _ -> Ast_mapper.default_mapper.structure_item self str 
       end
     end
